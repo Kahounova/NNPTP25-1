@@ -7,47 +7,43 @@ namespace NNPTPZ1
     {
         public class Polynome
         {
-            /// <summary>
-            /// Coe
-            /// </summary>
             public List<ComplexNumber> Coefficients { get; set; }
 
-            /// <summary>
-            /// Constructor
-            /// </summary>
             public Polynome() => Coefficients = new List<ComplexNumber>();
 
             public void Add(ComplexNumber coefficient) =>
                 Coefficients.Add(coefficient);
 
             /// <summary>
-            /// Derives this polynomial and creates new one
+            /// Creates and returns a new polynomial that is the derivative of the current one.
             /// </summary>
             /// <returns>Derivated polynomial</returns>
             public Polynome Derive()
             {
-                Polynome derivativePolynome = new Polynome();
+                Polynome derivedPolynome = new Polynome();
                 for (int i = 1; i < Coefficients.Count; i++)
                 {
-                    derivativePolynome.Coefficients.Add(Coefficients[i].Multiply(new ComplexNumber() { RealPart = i }));
+                    derivedPolynome.Coefficients.Add(Coefficients[i]
+                                                .Multiply(new ComplexNumber() { RealPart = i }));
                 }
 
-                return derivativePolynome;
+                return derivedPolynome;
             }
 
             /// <summary>
-            /// Evaluates polynomial at given point
+            /// Calculates the value of the polynomial for a given real number.
             /// </summary>
-            /// <param name="x">point of evaluation</param>
-            /// <returns>y</returns>
+            /// <param name="point">The real number at which the polynomial is evaluated.</param>
+            /// <returns>The resulting complex value of the polynomial.</returns>
             public ComplexNumber Eval(double point) =>
-                Eval(new ComplexNumber { RealPart = point, ImaginaryPart = 0 });
+                Eval(new ComplexNumber { RealPart = point});
 
             /// <summary>
-            /// Evaluates polynomial at given point
+            /// Calculates the polynomial’s value for a given complex input.
             /// </summary>
-            /// <param name="x">point of evaluation</param>
-            /// <returns>y</returns>
+            /// <param name="point">The complex number where the polynomial is evaluated.</param>
+            /// <returns>The computed complex result.</returns>
+
             public ComplexNumber Eval(ComplexNumber point)
             {
                 ComplexNumber polynomialValue = ComplexNumber.Zero;
@@ -72,11 +68,6 @@ namespace NNPTPZ1
                 return polynomialValue;
             }
 
-
-            /// <summary>
-            /// ToString
-            /// </summary>
-            /// <returns>String repr of polynomial</returns>
             public override string ToString()
             {
                 string polynomialString = "";
